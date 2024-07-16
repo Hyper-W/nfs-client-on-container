@@ -1,0 +1,23 @@
+services:
+  nfs-client:
+    build:
+      context: .
+      args:
+        - USER=${USER:-user} # # Your User Name
+        - USER_ID=${USER_ID:-1000} # Your User ID
+        - GROUP_ID=${GROUP_ID:-1000} # Your GROUP ID
+    image: ghcr.io/hyper-w/nfs-client-on-container/nfs-client
+    container_name: nfs-client
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - type: bind
+        source: ./nfs-client/fstab
+        target: /etc/fstab
+    tty: true
+    restart: always
+    command: bash
+
+volumes:
+  nfs-volumes:
+    name: nfs-volumes
