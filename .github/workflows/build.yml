@@ -13,6 +13,10 @@ jobs:
         permissions:
             contents: read
             packages: write
+        env:
+            USER: user
+            USER_ID: 1000
+            GROUP_ID: 1000
         steps:
             - uses: actions/checkout@v4
             - name: Login ghcr.io
